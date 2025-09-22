@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Player with Watermark</title>
+    <script src="https://cdn.jsdelivr.net/npm/videojs-video-element/+esm" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/player.style/yt/+esm" type="module"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&family=Dancing+Script:wght@600&family=Pacifico&family=Raleway:ital,wght@0,300;0,600;1,300&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .player-container {
+            width: 100%;
+            max-width: 800px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+        
+        media-theme-yt {
+            width: 100%;
+            --media-theme-yt-primary: #ff0000;
+        }
+        
+        .watermark {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            color: rgba(255, 255, 255, 0.85);
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            font-weight: 700;
+            font-style: italic;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+            z-index: 100;
+            pointer-events: none;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 5px 12px;
+            border-radius: 4px;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+    <div class="player-container">
+        <div class="watermark">Md Anis Gazi</div>
+        <media-theme-yt style="width: 100%;">
+            <videojs-video 
+                crossorigin="anonymous" 
+                playsinline 
+                slot="media" 
+                src="https://muc100.myluck1.top:8088/live/webcrichindi/playlist.m3u8?id=119771&pk=1fd32e02403475213644684e2dcaa23c4c48d7d5612fdc03bbae56af91db8dcb4452c2c8c8d0d7595e2a6cd8626a020e13372a8db0d7fed986807e9380a0dfac"
+                poster="https://res.cloudinary.com/dlklqihg6/image/upload/v1758418031/lrdrvv2wo4jyyf1v3lvy.jpg"
+            ></videojs-video>
+        </media-theme-yt>
+    </div>
+
+    <script>
+        // Adjust player height based on aspect ratio
+        function adjustPlayerHeight() {
+            const player = document.querySelector('media-theme-yt');
+            const width = player.clientWidth;
+            // Using 16:9 aspect ratio
+            const height = width * (9/16);
+            player.style.height = `${height}px`;
+        }
+        
+        // Adjust on load and resize
+        window.addEventListener('load', adjustPlayerHeight);
+        window.addEventListener('resize', adjustPlayerHeight);
+    </script>
+</body>
+</html>
